@@ -52,11 +52,11 @@ const Mutation = objectType({
     t.nonNull.field('deleteColor', {
       type: 'Color',
       args: {
-        colorId: nonNull(idArg()),
+        id: nonNull(idArg()),
       },
-      resolve: (_, { colorId }) => {
+      resolve: (_, { id }) => {
         return prisma.color.delete({
-          where: { id: colorId },
+          where: { id },
         });
       },
     });
