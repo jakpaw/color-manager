@@ -36,3 +36,9 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# db
+prisma/dev.db
+
+# generated types
+/generated

@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Color {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  value  String
+}
