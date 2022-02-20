@@ -11,6 +11,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
+        <h1>Color manager</h1>
         <Colors />
       </main>
     </div>

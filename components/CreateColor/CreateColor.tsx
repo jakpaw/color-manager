@@ -1,16 +1,8 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-
-const CREATE_COLOR = gql`
-  mutation CreateColor($name: String!, $value: String!) {
-    createColor(name: $name, value: $value) {
-      id
-      name
-      value
-    }
-  }
-`;
+import { useCreateColor } from './hooks';
 
 interface CreateColorForm {
   name: string;
@@ -18,27 +10,24 @@ interface CreateColorForm {
 }
 
 const CreateColor = () => {
-  // TODO: add types
-  const [createColor] = useMutation(CREATE_COLOR, {
-    refetchQueries: ['GetColors'],
-  });
+  const { createColor, creating } = useCreateColor();
 
-  const { handleSubmit, register } = useForm<CreateColorForm>();
-
-  const handleCreate = async ({ name, value }: CreateColorForm) => {
-    try {
-      await createColor({ variables: { name, value: `#${value}` } });
-    } catch (error) {
-      // TODO: show error
-      console.error(error);
-    }
-  };
+  const { handleSubmit, register, reset } = useForm<CreateColorForm>();
+  const handleCreate = useCallback(
+    async (formData: CreateColorForm) => {
+      await createColor(formData);
+      reset(); // TODO: do not reset on error
+    },
+    [createColor, reset]
+  );
 
   return (
     <form onSubmit={handleSubmit(handleCreate)}>
-      <input {...register('name')} />
-      #<input {...register('value')} />
-      <button type="submit">Create color</button>
+      <input {...register('name')} disabled={creating} />
+      #<input {...register('value')} disabled={creating} />
+      <button type="submit" disabled={creating}>
+        {creating ? 'Creating...' : 'Create color'}
+      </button>
     </form>
   );
 };

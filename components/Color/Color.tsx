@@ -1,15 +1,7 @@
-import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
+import classNames from 'classnames';
 
-const DELETE_COLOR = gql`
-  mutation DeleteColor($id: ID!) {
-    deleteColor(id: $id) {
-      id
-      name
-      value
-    }
-  }
-`;
+import styles from './Color.module.scss';
+import { useDeleteColor } from './hooks';
 
 interface ColorProps {
   id: string;
@@ -18,26 +10,15 @@ interface ColorProps {
 }
 
 const Color = ({ id, name, value }: ColorProps) => {
-  // TODO: add types
-  const [deleteColor] = useMutation(DELETE_COLOR, {
-    variables: { id },
-    refetchQueries: ['GetColors'],
-  });
-
-  const handleDelete = async () => {
-    try {
-      await deleteColor();
-    } catch (error) {
-      // TODO: show error
-      console.error(error);
-    }
-  };
+  const { deleteColor, deleting } = useDeleteColor(id);
 
   return (
-    <li>
+    <li
+      className={classNames(styles.color, deleting && styles.color__deleting)}
+    >
       {name}: {value}
-      <button type="button" onClick={handleDelete}>
-        Delete color
+      <button type="button" onClick={deleteColor} disabled={deleting}>
+        {deleting ? 'Deleting...' : 'Delete color'}
       </button>
     </li>
   );

@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import Color from '../Color';
 import CreateColor from '../CreateColor';
 
-const GET_COLORS = gql`
+const GET_COLORS_QUERY = gql`
   query GetColors {
     colors {
       id
@@ -14,20 +14,25 @@ const GET_COLORS = gql`
 `;
 
 const Colors = () => {
-  const { data, error } =
-    useQuery<Pick<NexusGen['fieldTypes']['Query'], 'colors'>>(GET_COLORS);
+  const { data, error, loading } =
+    useQuery<Pick<NexusGen['fieldTypes']['Query'], 'colors'>>(GET_COLORS_QUERY);
 
-  // TODO: loader
-  return (
+  return loading ? (
+    <div>Loading colors...</div>
+  ) : (
     <div>
-      {error && <>error: {JSON.stringify(error)}</>}
+      {error && <div>Loding colors failed: {error.message}</div>}
 
-      <ul>
-        {data?.colors.map(({ id, name, value }) => (
-          <Color key={id} id={id} name={name} value={value} />
-        ))}
-      </ul>
-      <CreateColor />
+      {data && (
+        <>
+          <ul>
+            {data?.colors.map(({ id, name, value }) => (
+              <Color key={id} id={id} name={name} value={value} />
+            ))}
+          </ul>
+          <CreateColor />
+        </>
+      )}
     </div>
   );
 };
