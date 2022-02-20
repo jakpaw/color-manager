@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import ColorSample from '../ColorSample';
 
 import styles from './Color.module.scss';
 import { useDeleteColor } from './hooks';
@@ -14,9 +15,14 @@ const Color = ({ id, name, value }: ColorProps) => {
 
   return (
     <li
-      className={classNames(styles.color, deleting && styles.color__deleting)}
+      className={classNames(
+        styles.color,
+        deleting && styles['color--deleting']
+      )}
     >
-      {name}: {value}
+      <ColorSample color={value} />
+      <span className={styles.color__name}> {name}</span>{' '}
+      <span className={styles.color__value}>{value.slice(1)}</span>
       <button type="button" onClick={deleteColor} disabled={deleting}>
         {deleting ? 'Deleting...' : 'Delete color'}
       </button>

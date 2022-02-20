@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import Color from '../Color';
 import CreateColor from '../CreateColor';
 
+import styles from './Colors.module.scss';
+
 const GET_COLORS_QUERY = gql`
   query GetColors {
     colors {
@@ -25,7 +27,7 @@ const Colors = () => {
 
       {data && (
         <>
-          <ul>
+          <ul className={styles.colors__list}>
             {data?.colors.map(({ id, name, value }) => (
               <Color key={id} id={id} name={name} value={value} />
             ))}

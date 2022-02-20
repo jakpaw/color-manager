@@ -1,5 +1,22 @@
 .color {
-  &__deleting {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  padding: 10px 0;
+
+  &--deleting {
     opacity: 0.5;
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__value {
+    color: #888;
+
+    &::before {
+      content: '#';
+    }
   }
 }

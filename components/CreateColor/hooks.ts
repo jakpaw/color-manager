@@ -30,7 +30,7 @@ export function useCreateColor() {
     async ({ name, value }: ColorData) => {
       try {
         setCreating(true);
-        await createColor({ variables: { name, value: `#${value}` } });
+        await createColor({ variables: { name, value } });
       } catch (error) {
         // TODO: extract error handling to a common place
         const errorWithMessage = error as { message?: string };
