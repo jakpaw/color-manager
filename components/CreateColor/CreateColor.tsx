@@ -25,20 +25,38 @@ const CreateColor = () => {
   );
 
   return (
-    <form
-      onSubmit={handleSubmit(handleCreate)}
-      className={styles['create-color']}
-    >
-      <ColorSample color={`#${watch('value')}`} />
-      <input {...register('name')} disabled={creating} />
-      {/* TODO: client side validation */}
-      <span>
-        #<input {...register('value')} disabled={creating} />
-      </span>
-      <button type="submit" disabled={creating}>
-        {creating ? 'Creating...' : 'Create color'}
-      </button>
-    </form>
+    <section>
+      <h2>Create new color</h2>
+      <form
+        onSubmit={handleSubmit(handleCreate)}
+        className={styles['create-color']}
+      >
+        <ColorSample color={`#${watch('value')}`} />
+        <span>
+          <label htmlFor="create-color-name">Name:</label>
+          &nbsp;
+          <input
+            id="create-color-name"
+            placeholder="Dark"
+            {...register('name')}
+            disabled={creating}
+          />
+        </span>
+        <span>
+          <label htmlFor="create-color-value">Value: #</label>
+          {/* TODO: client side validation */}
+          <input
+            id="create-color-value"
+            placeholder="112233"
+            {...register('value')}
+            disabled={creating}
+          />
+        </span>
+        <button type="submit" disabled={creating}>
+          {creating ? 'Creating...' : 'Create color'}
+        </button>
+      </form>
+    </section>
   );
 };
 

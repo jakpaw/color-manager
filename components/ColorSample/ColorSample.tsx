@@ -1,3 +1,4 @@
+import { isValidColorHex } from '../../shared/validation';
 import styles from './ColorSample.module.scss';
 
 interface ColorSampleProps {
@@ -8,7 +9,7 @@ const ColorSample = ({ color }: ColorSampleProps) => {
   return (
     <div
       className={styles['color-sample']}
-      style={{ backgroundColor: color }}
+      style={isValidColorHex(color) ? { background: color } : {}}
     />
   );
 };

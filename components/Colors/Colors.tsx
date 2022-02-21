@@ -20,9 +20,9 @@ const Colors = () => {
     useQuery<Pick<NexusGen['fieldTypes']['Query'], 'colors'>>(GET_COLORS_QUERY);
 
   return loading ? (
-    <div>Loading colors...</div>
+    <section>Loading colors...</section>
   ) : (
-    <div>
+    <section>
       {error && <div>Loding colors failed: {error.message}</div>}
 
       {data && (
@@ -35,7 +35,7 @@ const Colors = () => {
           <CreateColor />
         </>
       )}
-    </div>
+    </section>
   );
 };
 
