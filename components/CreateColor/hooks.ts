@@ -7,7 +7,7 @@ interface ColorData {
   value: string;
 }
 
-const CREATE_COLOR_MUTATION = gql`
+export const CREATE_COLOR_MUTATION = gql`
   mutation CreateColor($name: String!, $value: String!) {
     createColor(name: $name, value: $value) {
       id

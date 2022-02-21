@@ -24,7 +24,7 @@ const Color = ({ id, name, value }: ColorProps) => {
       <span className={styles.color__name}> {name}</span>{' '}
       <span className={styles.color__value}>{value.slice(1)}</span>
       <button type="button" onClick={deleteColor} disabled={deleting}>
-        {deleting ? 'Deleting...' : 'Delete color'}
+        {deleting ? 'Deleting...' : `Delete color ${name}`}
       </button>
     </li>
   );

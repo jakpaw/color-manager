@@ -5,7 +5,7 @@ import CreateColor from '../CreateColor';
 
 import styles from './Colors.module.scss';
 
-const GET_COLORS_QUERY = gql`
+export const GET_COLORS_QUERY = gql`
   query GetColors {
     colors {
       id
@@ -17,6 +17,7 @@ const GET_COLORS_QUERY = gql`
 
 const Colors = () => {
   const { data, error, loading } =
+    // TODO: use a better type generator
     useQuery<Pick<NexusGen['fieldTypes']['Query'], 'colors'>>(GET_COLORS_QUERY);
 
   return loading ? (

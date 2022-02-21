@@ -15,7 +15,8 @@ interface CreateColorForm {
 const CreateColor = () => {
   const { createColor, creating } = useCreateColor();
 
-  const { handleSubmit, register, reset, watch } = useForm<CreateColorForm>();
+  const { handleSubmit, register, reset, watch, formState } =
+    useForm<CreateColorForm>();
   const handleCreate = useCallback(
     async ({ name, value }: CreateColorForm) => {
       await createColor({ name, value: `#${value}` });
@@ -55,6 +56,8 @@ const CreateColor = () => {
         <button type="submit" disabled={creating}>
           {creating ? 'Creating...' : 'Create color'}
         </button>
+
+        {JSON.stringify(formState.errors)}
       </form>
     </section>
   );

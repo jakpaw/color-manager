@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { useCallback, useState } from 'react';
 import gql from 'graphql-tag';
 
-const DELETE_COLOR_MUTATION = gql`
+export const DELETE_COLOR_MUTATION = gql`
   mutation DeleteColor($id: ID!) {
     deleteColor(id: $id) {
       id
