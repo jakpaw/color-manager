@@ -56,8 +56,6 @@ const CreateColor = () => {
         <button type="submit" disabled={creating}>
           {creating ? 'Creating...' : 'Create color'}
         </button>
-
-        {JSON.stringify(formState.errors)}
       </form>
     </section>
   );
