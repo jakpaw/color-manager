@@ -38,7 +38,7 @@ const CreateColor = () => {
           <input
             id="create-color-name"
             placeholder="Dark"
-            {...register('name')}
+            {...register('name', { required: true })}
             disabled={creating}
           />
         </span>
@@ -48,7 +48,7 @@ const CreateColor = () => {
           <input
             id="create-color-value"
             placeholder="112233"
-            {...register('value')}
+            {...register('value', { required: true })}
             disabled={creating}
           />
         </span>
